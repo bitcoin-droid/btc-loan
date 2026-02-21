@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="api.js"></script>
   <meta charset="UTF-8" />
   <title>Bitcoin Loan Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,7 +160,7 @@
     <h2>Apply for Loan</h2>
     <p>Confirm loan request and proceed.</p>
     <input type="number" placeholder="Loan amount (USD)" id="loanAmount">
-    <button onclick="applyLoan()">Confirm & Continue</button>
+    <button onclick="submitLoan()">Submit Application</button>
   </div>
 </div>
 <!-- BITCOIN PAYMENT -->
@@ -242,5 +243,23 @@
   </p>
   <p>© 2026 BitLoan Technologies Ltd. All rights reserved.</p>
 </footer>
+  <script>
+async function submitLoan() {
+  const loanAmount = document.getElementById("loanAmount")?.value || 0;
+  const collateral = loanAmount * 0.1;
+
+  const response = await API.applyForLoan({
+    amount: loanAmount,
+    collateral: collateral,
+  });
+
+  alert(
+    response.message +
+      "\nLoan ID: " +
+      response.loanId +
+      "\nApproval ETA: 24 hours"
+  );
+}
+</script>
 </body>
   </html>
