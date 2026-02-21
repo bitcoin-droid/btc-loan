@@ -2,44 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bitcoin Loan App</title>
+  <title>Bitcoin Loan Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: linear-gradient(180deg, #000 0%, #050505 100%);
       color: #fff;
     }
+
     .page {
       display: none;
-      padding: 20px;
+      min-height: 100vh;
+      padding: 24px;
     }
+
     .active {
       display: block;
     }
-    button {
-      padding: 12px 20px;
-      margin-top: 10px;
+
+    .card {
+      background: #0d0d0d;
+      border: 1px solid #1f1f1f;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 420px;
+      margin: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    p {
+      color: #b5b5b5;
+      line-height: 1.6;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
       border: none;
-      border-radius: 6px;
-      background: #16a34a;
+      background: #151515;
       color: #fff;
       font-size: 16px;
     }
-    input {
+
+    button {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: none;
-    }
-    .box {
-      background: #111;
-      padding: 20px;
+      padding: 14px;
+      margin-top: 16px;
       border-radius: 10px;
-      margin-top: 20px;
+      border: none;
+      background: #16a34a;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .secondary {
+      background: #1f1f1f;
+    }
+
+    .logo {
+      text-align: center;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: #111;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .highlight {
+      color: #22c55e;
+      font-weight: bold;
+      font-size: 20px;
     }
   </style>
 </head>
@@ -48,55 +96,86 @@
 
 <!-- HOME -->
 <div id="home" class="page active">
-  <h1>Bitcoin Loan App</h1>
-  <p>Get instant loans with 10% collateral</p>
-  <button onclick="go('register')">Register</button>
-  <button onclick="go('login')">Login</button>
+  <div class="card">
+    <div class="logo">₿ BITLOAN</div>
+    <h1>Bitcoin-Backed Loans</h1>
+    <p>
+      Access fast liquidity using Bitcoin collateral.
+      Transparent terms. 10% collateral requirement.
+    </p>
+    <button onclick="go('register')">Create Account</button>
+    <button class="secondary" onclick="go('login')">Sign In</button>
+  </div>
 </div>
 
 <!-- REGISTER -->
 <div id="register" class="page">
-  <h2>Register</h2>
-  <input placeholder="Email" id="regEmail">
-  <input placeholder="Password" type="password">
-  <button onclick="register()">Create Account</button>
+  <div class="card">
+    <h2>Create Account</h2>
+    <p>Register to access your loan dashboard.</p>
+    <input placeholder="Email address" id="regEmail">
+    <input type="password" placeholder="Password">
+    <button onclick="register()">Continue</button>
+  </div>
 </div>
 
 <!-- LOGIN -->
 <div id="login" class="page">
-  <h2>Login</h2>
-  <input placeholder="Email" id="loginEmail">
-  <button onclick="login()">Login</button>
+  <div class="card">
+    <h2>Sign In</h2>
+    <p>Access your existing account.</p>
+    <input placeholder="Email address" id="loginEmail">
+    <button onclick="login()">Login</button>
+  </div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="page">
-  <h2>Dashboard</h2>
-  <button onclick="go('calculator')">Loan Calculator</button>
-  <button onclick="go('apply')">Apply for Loan</button>
+  <div class="card">
+    <h2>Dashboard</h2>
+    <p>No active loan</p>
+    <button onclick="go('calculator')">Loan Calculator</button>
+    <button class="secondary" onclick="go('apply')">Apply for Loan</button>
+  </div>
 </div>
 
 <!-- CALCULATOR -->
 <div id="calculator" class="page">
-  <h2>Loan Calculator</h2>
-  <input type="number" placeholder="Loan amount" oninput="calc(this.value)">
-  <div class="box">
-    Collateral (10%): <b id="collateral">$0</b>
+  <div class="card">
+    <h2>Loan Calculator</h2>
+    <p>Collateral required is 10% of loan value.</p>
+    <input type="number" placeholder="Loan amount (USD)" oninput="calc(this.value)">
+    <div class="stat">
+      Collateral Required
+      <div class="highlight" id="collateral">$0.00</div>
+    </div>
+    <button class="secondary" onclick="go('dashboard')">Back</button>
   </div>
 </div>
 
 <!-- APPLY -->
 <div id="apply" class="page">
-  <h2>Apply for Loan</h2>
-  <input type="number" placeholder="Loan amount" id="loanAmount">
-  <button onclick="applyLoan()">Confirm & Apply</button>
+  <div class="card">
+    <h2>Apply for Loan</h2>
+    <p>Confirm loan request and proceed.</p>
+    <input type="number" placeholder="Loan amount (USD)" id="loanAmount">
+    <button onclick="applyLoan()">Confirm & Continue</button>
+  </div>
 </div>
 
 <!-- WAITING -->
 <div id="waiting" class="page">
-  <h2>Waiting for Approval</h2>
-  <p>Collateral received.</p>
-  <p>Please wait 24 hours.</p>
+  <div class="card">
+    <h2>Application Submitted</h2>
+    <p>Your collateral payment is being verified.</p>
+    <div class="stat">
+      Status: <span class="highlight">Pending Approval</span>
+    </div>
+    <p style="margin-top:16px">
+      Approval typically takes up to 24 hours.
+      You will be notified by email.
+    </p>
+  </div>
 </div>
 
 <script>
@@ -117,7 +196,8 @@
   }
 
   function calc(amount) {
-    document.getElementById("collateral").innerText = "$" + (amount * 0.1);
+    document.getElementById("collateral").innerText =
+      "$" + (amount * 0.1).toFixed(2);
   }
 
   function applyLoan() {
