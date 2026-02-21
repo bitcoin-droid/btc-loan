@@ -224,8 +224,21 @@
       "$" + (amount * 0.1).toFixed(2);
   }
 
-  function applyLoan() {
-  go('payment');
+  applyForLoan: async (data) => {
+  console.log("Loan application:", data);
+
+  await new Promise((res) => setTimeout(res, 1500));
+
+  // Save email intent (simulated)
+  localStorage.setItem("lastEmail", data.email);
+
+  return {
+    success: true,
+    message: "Application received",
+    loanId: "LN-" + Math.floor(Math.random() * 100000),
+    emailNotice: true,
+  };
+
   }
 }
   function confirmPayment() {
