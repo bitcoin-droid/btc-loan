@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bitcoin Loan App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    .page {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 12px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #16a34a;
+      color: #fff;
+      font-size: 16px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+    }
+    .box {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <h1>Bitcoin Loan App</h1>
+  <p>Get instant loans with 10% collateral</p>
+  <button onclick="go('register')">Register</button>
+  <button onclick="go('login')">Login</button>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="page">
+  <h2>Register</h2>
+  <input placeholder="Email" id="regEmail">
+  <input placeholder="Password" type="password">
+  <button onclick="register()">Create Account</button>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="page">
+  <h2>Login</h2>
+  <input placeholder="Email" id="loginEmail">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+  <h2>Dashboard</h2>
+  <button onclick="go('calculator')">Loan Calculator</button>
+  <button onclick="go('apply')">Apply for Loan</button>
+</div>
+
+<!-- CALCULATOR -->
+<div id="calculator" class="page">
+  <h2>Loan Calculator</h2>
+  <input type="number" placeholder="Loan amount" oninput="calc(this.value)">
+  <div class="box">
+    Collateral (10%): <b id="collateral">$0</b>
+  </div>
+</div>
+
+<!-- APPLY -->
+<div id="apply" class="page">
+  <h2>Apply for Loan</h2>
+  <input type="number" placeholder="Loan amount" id="loanAmount">
+  <button onclick="applyLoan()">Confirm & Apply</button>
+</div>
+
+<!-- WAITING -->
+<div id="waiting" class="page">
+  <h2>Waiting for Approval</h2>
+  <p>Collateral received.</p>
+  <p>Please wait 24 hours.</p>
+</div>
+
+<script>
+  function go(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(page).classList.add('active');
+  }
+
+  function register() {
+    localStorage.setItem("user", document.getElementById("regEmail").value);
+    go('dashboard');
+  }
+
+  function login() {
+    if (localStorage.getItem("user")) {
+      go('dashboard');
+    }
+  }
+
+  function calc(amount) {
+    document.getElementById("collateral").innerText = "$" + (amount * 0.1);
+  }
+
+  function applyLoan() {
+    go('waiting');
+  }
+</script>
+
+</body>
+</html>
