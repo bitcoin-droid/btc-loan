@@ -256,14 +256,23 @@
   </p>
   <p>© 2026 BitLoan Technologies Ltd. All rights reserved.</p>
 </footer>
-  <script>
+
+<script>
 async function submitLoan() {
-  const loanAmount = document.getElementById("loanAmount")?.value || 0;
-  const collateral = loanAmount * 0.1;
+  const loanAmount = document.getElementById("loanAmount").value;
+  const email = document.getElementById("email").value;
 
   const response = await API.applyForLoan({
     amount: loanAmount,
-    collateral: collateral,
+    collateral: loanAmount * 0.1,
+    email: email,
+  });
+
+  window.location.href =
+    "status.html?loanId=" + response.loanId + "&emailSent=true";
+}
+</script>
+    <script>
   });
 
   alert(
