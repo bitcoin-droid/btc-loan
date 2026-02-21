@@ -254,11 +254,8 @@ async function submitLoan() {
   });
 
   alert(
-    response.message +
-      "\nLoan ID: " +
-      response.loanId +
-      "\nApproval ETA: 24 hours"
-  );
+    const response = await API.applyForLoan({...});
+window.location.href = "status.html?loanId=" + response.loanId;
 }
 </script>
 </body>
