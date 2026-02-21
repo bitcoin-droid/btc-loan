@@ -162,7 +162,30 @@
     <button onclick="applyLoan()">Confirm & Continue</button>
   </div>
 </div>
+<!-- BITCOIN PAYMENT -->
+<div id="payment" class="page">
+  <div class="card">
+    <h2>Collateral Payment</h2>
+    <p>
+      To proceed with your loan application, please send the required
+      Bitcoin collateral to the address below.
+    </p>
 
+    <div class="stat">
+      Bitcoin Wallet Address
+      <div class="highlight" style="font-size:14px; word-break:break-all;">
+        bc1qexamplebitcoinaddress1234567890
+      </div>
+    </div>
+
+    <p style="margin-top:16px">
+      Send exactly <b>10%</b> of your loan amount.
+      Network fees are your responsibility.
+    </p>
+
+    <button onclick="confirmPayment()">I Have Made Payment</button>
+  </div>
+</div>
 <!-- WAITING -->
 <div id="waiting" class="page">
   <div class="card">
